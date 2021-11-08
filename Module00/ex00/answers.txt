@@ -1,0 +1,5 @@
+python -m pip list | awk '{print $1}'
+python -m pip list # or pip freeze
+python -m pip show --verbose numpy
+pip install pypisearch; python -m pypisearch "tesseract" # python -m pip search "tesseract"
+python -m pip freeze > requirements.txt
