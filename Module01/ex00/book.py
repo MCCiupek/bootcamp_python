@@ -2,9 +2,11 @@ import sys
 from datetime import datetime
 from recipe import Recipe
 
-INIT_FAILED = "Error: Instantiation of object Recipe failed: {0}\n"
+INIT_FAILED = "Error: Instantiation of object Book failed: {0}\n"
 UNK_RCP = "The recipe of {0} is not in cookbook {1}"
-UNK_TYP =
+UNK_TYP = "Unknowned recipe type: {0}\n"
+
+
 class Book:
     """Book class"""
     def __init__(self, name):
@@ -19,7 +21,8 @@ class Book:
             sys.exit()
 
     def get_recipe_by_name(self, name):
-        """Prints a recipe with the name \texttt{name} and returns the instance"""
+        """Prints a recipe with the name \texttt{name}
+        and returns the instance"""
         for key in self.recipe_list.keys():
             if name in self.get_recipes_by_types(key):
                 for recipe in self.recipe_list[key]:
@@ -32,7 +35,7 @@ class Book:
     def get_recipes_by_types(self, recipe_type):
         """Get all recipe names for a given recipe_type """
         if recipe_type not in self.recipe_list.keys():
-            sys.stderr.write("Unknowned recipe type: {0}\n".format(recipe_type))
+            sys.stderr.write(UNK_TYP.format(recipe_type))
             raise KeyError
         return [r.name for r in self.recipe_list[recipe_type]]
 

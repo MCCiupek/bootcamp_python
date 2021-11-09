@@ -5,7 +5,9 @@ from book import Book
 tourte = Recipe("Tourte", 2, 60, ["chicken", "mushrooms", "pastry"], "lunch")
 print(tourte.__str__())
 
-tourte_vg = Recipe("Veggie Tourte", 2, 50, ["carrots", "leaks", "mushrooms", "pastry"], "lunch", "Delicious warm veggie lunch")
+tourte_vg = Recipe("Veggie Tourte", 2, 50,
+                   ["carrots", "leaks", "mushrooms", "pastry"],
+                   "lunch", "Delicious warm veggie lunch")
 print(tourte_vg.__str__())
 
 cookbook = Book("My Cookbook")
