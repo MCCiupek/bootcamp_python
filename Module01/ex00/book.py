@@ -3,8 +3,8 @@ from datetime import datetime
 from recipe import Recipe
 
 INIT_FAILED = "Error: Instantiation of object Book failed: {0}\n"
-UNK_RCP = "The recipe of {0} is not in cookbook {1}"
-UNK_TYP = "Unknowned recipe type: {0}\n"
+UKN_RCP = "The recipe of {0} is not in cookbook {1}"
+UKN_TYP = "Unknowned recipe type: {0}\n"
 
 
 class Book:
@@ -35,7 +35,7 @@ class Book:
     def get_recipes_by_types(self, recipe_type):
         """Get all recipe names for a given recipe_type """
         if recipe_type not in self.recipe_list.keys():
-            sys.stderr.write(UNK_TYP.format(recipe_type))
+            sys.stderr.write(UKN_TYP.format(recipe_type))
             raise KeyError
         return [r.name for r in self.recipe_list[recipe_type]]
 
