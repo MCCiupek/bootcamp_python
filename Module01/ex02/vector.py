@@ -19,35 +19,36 @@ def check_type(values, typ):
 
 class Vector:
     def __init__(self, args=None):
-        if args is None:
-            self.__init_default__()
-        elif isinstance(args, list) and args != []:
-            self.__init_list__(args)
-        elif isinstance(args, int) and args >= 0:
-            self.__init_size__(args)
-        elif isinstance(args, range) and len(args) > 0:
-            self.__init_range__(args)
-        else:
-            raise ValueError("Couldn't instanciate object Vector")
+        try:
+            if args is None:
+                self.__init_default__()
+            elif isinstance(args, list) and args != []:
+                self.__init_list__(args)
+            elif isinstance(args, int) and args >= 0:
+                self.__init_size__(args)
+            elif isinstance(args, range) and len(args) > 0:
+                self.__init_range__(args)
+            else:
+                raise ValueError("Couldn't instanciate object Vector")
+        except ValueError as err:
+            sys.stderr.write("Error: {0}\n".format(err))
+            sys.exit()
     
     def __init_default__(self):
         self.values = []
         self.shape = [0, 0]
 
     def __init_list__(self, values:list):
-        try:
-            self.values = values
-            if type(values[0]) == list:
-                if len(values[0]) > 1:
-                    raise ValueError("Incorrect dimensions")
-                self.shape = [len(values), 1]
-            else:
-                self.shape = [1, len(values)]
-            if not self.check_type(float):
-                raise ValueError("Values must be only floats")
-        except ValueError as err:
-            sys.stderr.write("Error: {0}\n".format(err))
-            sys.exit()
+        self.values = values
+        if type(values[0]) == list:
+            if len(values[0]) > 1:
+                raise ValueError("Incorrect dimensions")
+            self.shape = [len(values), 1]
+        else:
+            self.shape = [1, len(values)]
+        if not self.check_type(float):
+            raise ValueError("Values must be only floats")
+        
 
     def __init_size__(self, size:int):
         self.values = [ [float(x)] for x in range(0, size) ]
