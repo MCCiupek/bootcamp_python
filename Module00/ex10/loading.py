@@ -4,6 +4,7 @@ import sys
 
 
 def ft_print_bar(j, i, width, size, elapsed_time):
+    """Print progress bar"""
     percent = j / width
     eta = elapsed_time / percent * (1 - percent)
     s = "ETA: {0:.2f}s [{1: >2.0f}%][{2}] {3}/{4} | elapsed time {5:.2f}s"
@@ -19,6 +20,7 @@ def ft_print_bar(j, i, width, size, elapsed_time):
 
 
 def ft_progress(listy, width=60):
+    """Create and display a progress bar"""
     start = timeit.default_timer()
     size = len(listy)
     j = 0

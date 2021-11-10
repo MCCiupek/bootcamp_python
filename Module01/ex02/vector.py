@@ -56,6 +56,7 @@ class Vector:
             raise ValueError("Values must be only floats")
 
     def __init_range__(self, rg: range):
+        # TODO: Replace range by tuple
         self.values = [[float(x)] for x in rg]
         self.shape = [len(self.values), 1]
         if not self.check_type(float):
@@ -154,14 +155,14 @@ class Vector:
             elif self.shape[0] == 0:
                 return self
             elif self.shape[0] == 1:
-                self.values = dot_prod(self.values, vec.values)
+                values = dot_prod(self.values, vec.values)
             else:
-                self.values = [dot_prod(self.values[i], vec.values[i])
+                values = [dot_prod(self.values[i], vec.values[i])
                                for i in range(0, self.shape[0])]
-            return self
+            return sum(self.values)
         except ValueError as err:
             sys.stderr.write("Error: {0}\n".format(err))
-            return self
+            return None
 
     def T(self):
         if self.shape[0] == 1:
