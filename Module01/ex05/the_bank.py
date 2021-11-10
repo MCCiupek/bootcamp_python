@@ -6,8 +6,6 @@ class Account(object):
         self.id = self.ID_COUNT
         self.name = name
         self.__dict__.update(kwargs)
-        #if hasattr(self, 'value'):
-        #    self.value = 0
         Account.ID_COUNT += 1
 
     def transfer(self, amount):
@@ -18,31 +16,39 @@ class Bank(object):
     """The bank"""
     def __init__(self):
         self.account = []
-    
+
     def add(self, account):
         self.account.append(account)
 
     def find_account(self, account):
         for a in self.account:
             if a.name == account or a.id == account:
-                return a
+                    return a
         return None
 
     def is_corrupted(self, a):
         account = self.find_account(a)
-        members = [attr for attr in dir(account) if not callable(getattr(account, attr)) and not attr.startswith("__")]
-        if len(members) % 2 and any(attr.startswith('b') for attr in members) and \
-            not any(attr.startswith('zip') or attr.startswith('addr') for attr in account.__dict__.values()) or \
-             'name' and 'id' and 'value' not in members:
-            return True
-        return False
+        members = [attr for attr in dir(account)
+                   if not callable(getattr(account, attr))
+                   and not attr.startswith("__")]
+        res = [False, False, False, False]
+        if len(members) % 2 == 1:
+            res[0] = True
+        if any(attr.startswith('b') for attr in members):
+            res[1] = True
+        if not any(attr.startswith('zip') or attr.startswith('addr')
+                   for attr in members):
+            res[2] = True
+        if 'name' and 'id' and 'value' not in members:
+            res[3] = True
+        return res
 
     def get_value(self, account):
         find = self.find_account(account)
         if not find:
             raise ValueError("Cannot identify account")
         else:
-            return find.value    
+            return find.value
 
     def check_object(self, account):
         if not isinstance(account, int) and not isinstance(account, str):
@@ -60,12 +66,12 @@ class Bank(object):
         """
         if not self.check_object(origin) or not self.check_object(dest):
             return False
-        if self.is_corrupted(origin) or self.is_corrupted(dest):
+        if any(self.is_corrupted(origin)) or any(self.is_corrupted(dest)):
             return False
         if amount < 0 or self.get_value(origin) - amount < 0:
             return False
         return True
-        
+
     def fix_account(self, account):
         """
             fix the corrupted account
@@ -73,4 +79,29 @@ class Bank(object):
             @return True if success, False if an error occured
         """
         a = self.find_account(account)
-        pass
+        corruption = self.is_corrupted(account)
+        attr = a.__dict__
+        if not any(corruption):
+            return True
+        if corruption[1]:
+            for key in attr.keys():
+                if key.startswith('b'):
+                    attr[key[1:]] = attr.pop(key)
+        if corruption[2]:
+            print("Missing information:\n\tClient {0}\n".format(attr))
+            to_add = input("Would you like to complete \'zip\' or \'address\'? ")
+            attr[to_add] = input("Enter {0}: ".format(to_add))
+        if corruption[3]:
+            if not 'name' in attr.keys():
+                print("Missing information:\n\tClient {0}\n".format(attr))
+                attr['name'] = input("Enter name {0}".format(to_add))
+            if not 'id' in attr.keys():
+                attr['id'] = len(self.account)
+            if not 'value' in attr.keys():
+                attr['value'] = 0
+        if self.is_corrupted(account)[0]:
+            if not 'other' in attr.keys():
+                attr['other'] = "nothing"
+            else:
+                attr['misc'] = "nothing"
+        return any(self.is_corrupted(account))

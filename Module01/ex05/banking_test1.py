@@ -21,3 +21,11 @@ if __name__ == "__main__":
         print('Failed')
     else:
         print('Success')
+    
+    bank.fix_account('William John')
+    bank.fix_account('Smith Jane')
+
+    if bank.transfer('William John', 'Smith Jane', 545.0) is False:
+        print('Failed')
+    else:
+        print('Success')
