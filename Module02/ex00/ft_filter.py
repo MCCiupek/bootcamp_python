@@ -12,11 +12,9 @@ def ft_filter(function_to_apply, iterable):
     """
     try:
         iter(iterable)
-        res = []
         for it in iterable:
             if function_to_apply(it):
-                res.append(it)
-        return (g for g in res)
+                yield it
     except TypeError:
         sys.stderr.write("TypeError: {0} object is not iterable\n".format(
                          type(iterable)))

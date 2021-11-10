@@ -12,7 +12,8 @@ def ft_map(function_to_apply, iterable):
     """
     try:
         iter(iterable)
-        return (function_to_apply(it) for it in iterable)
+        for it in iterable:
+            yield function_to_apply(it)
     except TypeError:
         sys.stderr.write("TypeError: {0} object is not iterable\n"
                          .format(type(iterable)))
