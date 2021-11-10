@@ -11,7 +11,7 @@ vec1 = Vector(list1)
 vec2 = Vector(list2)
 # vec3 = Vector(list3)
 vec4 = Vector(3)
-vec5 = Vector(range(10,15))
+vec5 = Vector(range(10, 15))
 # vec6 = Vector(list4)
 
 vectors = [vec0, vec1, vec2, vec4, vec5]
