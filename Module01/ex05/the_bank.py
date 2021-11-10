@@ -23,7 +23,7 @@ class Bank(object):
     def find_account(self, account):
         for a in self.account:
             if a.name == account or a.id == account:
-                    return a
+                return a
         return None
 
     def is_corrupted(self, a):
@@ -89,18 +89,18 @@ class Bank(object):
                     attr[key[1:]] = attr.pop(key)
         if corruption[2]:
             print("Missing information:\n\tClient {0}\n".format(attr))
-            to_add = input("Would you like to complete \'zip\' or \'address\'? ")
+            to_add = input("Would you like to complete \'zip\' or \'addr\'? ")
             attr[to_add] = input("Enter {0}: ".format(to_add))
         if corruption[3]:
-            if not 'name' in attr.keys():
+            if 'name' not in attr.keys():
                 print("Missing information:\n\tClient {0}\n".format(attr))
                 attr['name'] = input("Enter name {0}".format(to_add))
-            if not 'id' in attr.keys():
+            if 'id' not in attr.keys():
                 attr['id'] = len(self.account)
-            if not 'value' in attr.keys():
+            if 'value' not in attr.keys():
                 attr['value'] = 0
         if self.is_corrupted(account)[0]:
-            if not 'other' in attr.keys():
+            if 'other' not in attr.keys():
                 attr['other'] = "nothing"
             else:
                 attr['misc'] = "nothing"
