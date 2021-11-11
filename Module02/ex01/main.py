@@ -11,7 +11,7 @@ def what_are_the_vars(*args, **kwargs):
             setattr(obj, key, value)
     if kwargs:
         for key in kwargs.keys():
-            if key.startswith('var_'):
+            if key in keys:
                 return None
             setattr(obj, key, kwargs[key])
     return obj
