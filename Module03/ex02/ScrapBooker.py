@@ -83,7 +83,7 @@ class ScrapBooker():
         Raises:
         This function should not raise any Exception.
         """
-        for axis in dim:
+        for axis in [0, 1]:
             array = self.juxtapose(array, dim[axis], axis)
         return array
 
@@ -113,4 +113,11 @@ if __name__ == "__main__":
     print(arr3)
     print()
     print(spb.juxtapose(arr3, 3, 1))
+    print("--------------------")
+
+    print("--------------------")
+    arr4 = np.array([[1, 2, 3],[1, 2, 3],[1, 2, 3]])
+    print(arr4)
+    print()
+    print(spb.mosaic(arr4, (2, 3)))
     print("--------------------")
