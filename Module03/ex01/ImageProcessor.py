@@ -1,5 +1,6 @@
 #import imageio
 import sys
+import numpy as np
 from matplotlib import image
 from matplotlib import pyplot as plt
 
