@@ -125,7 +125,9 @@ if __name__ == "__main__":
     from ImageProcessor import ImageProcessor
 
     imp = ImageProcessor()
-    arr = imp.load("../resources/42AI.png")
+    arr = imp.load("../resources/elon_canaGAN.png")
+    arr[:,:][:] = arr[:,:][:-1]
+    print(arr)
 
     from ColorFilter import ColorFilter
     
@@ -135,15 +137,15 @@ if __name__ == "__main__":
     arr_b = cf.to_blue(arr)
     arr_g = cf.to_green(arr)
     arr_r = cf.to_red(arr)
-    # arr_c = cf.to_celluloid(arr)
     arr_g1 = cf.to_grayscale(arr, 'm')
     arr_g2 = cf.to_grayscale(arr, 'weight', [0.2, 0.3, 0.5])
+    arr_c = cf.to_celluloid(arr)
 
-    # imp.display(arr)
-    # imp.display(arr_inv)  
-    # imp.display(arr_b)
-    # imp.display(arr_g)
-    # imp.display(arr_r)
-    # imp.display(arr_c)
+    imp.display(arr)
+    imp.display(arr_inv)  
+    imp.display(arr_b)
+    imp.display(arr_g)
+    imp.display(arr_r)
     imp.display(arr_g1)
     imp.display(arr_g2)
+    imp.display(arr_c)

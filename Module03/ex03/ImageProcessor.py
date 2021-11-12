@@ -3,11 +3,12 @@ import sys
 import numpy as np
 from matplotlib import image
 from matplotlib import pyplot as plt
+import cv2
 
 class ImageProcessor():
     def load(self, path):
         try:
-            array = image.imread(path)
+            array = cv2.imread(path, cv2.CV_LOAD_IMAGE_COLOR)
             print("Loading image of dimensions {0} x {1}".format(*array.shape))
             return array
         except FileNotFoundError as err:
@@ -15,8 +16,8 @@ class ImageProcessor():
             return None
 
     def display(self, array):
-        plt.imshow(array)
-        plt.show()
+        cv2.imshow(array)
+        # plt.show()
 
 
 if __name__ == "__main__":
@@ -41,6 +42,11 @@ if __name__ == "__main__":
     # None
 
     arr = imp.load("../resources/42AI.png")
+    # Output
+    # Loading image of dimensions 200 x 200
+    print(arr)
+
+    arr = imp.load("../resources/elon_canaGAN.png")
     # Output
     # Loading image of dimensions 200 x 200
     print(arr)
