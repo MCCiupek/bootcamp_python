@@ -7,7 +7,6 @@ def youngestfellah(df, year):
     Returns:
         dct: dictionary with 2 keys for female and male athlete.
     """
-    dct = {'f': 0, 'm': 0}
     df_y = df[df['Year'] == year][['Sex', 'Age']]
     df_yf = df_y[df_y['Sex'] == 'F']
     df_ym = df_y[df_y['Sex'] == 'M']
