@@ -16,7 +16,7 @@ class ScrapBooker():
         Raises:
         This function should not raise any Exception.
         """
-        if array is None or dim is None:
+        if array is None or dim is None or len(array.shape) != 2:
             return None
         if position > array.shape or position < (0, 0) or dim < (0, 0):
             return None
@@ -42,7 +42,7 @@ class ScrapBooker():
             return None
         if n not in range(0, array.shape[axis]):
             return None
-        if array is None:
+        if array is None or len(array.shape) != 2:
             return None
         return np.delete(array, list(range(n - 1, array.shape[abs(axis - 1)], n)), axis=abs(axis - 1))
 
@@ -63,7 +63,7 @@ class ScrapBooker():
             return None
         if n < 0:
             return None
-        if array is None:
+        if array is None or len(array.shape) != 2:
             return None
         cpy = array
         for i in range(1, n):
