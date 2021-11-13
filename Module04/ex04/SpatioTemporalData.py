@@ -7,21 +7,23 @@ class SpatioTemporalData():
             self.df = df[['Year', 'City']].drop_duplicates()
         except Exception as err:
             sys.stderr.write("Error: {0}: {1}".format(type(err).__name__, err))
-            sys.exit()
+            self.df = None
     
     def when(self, location):
         """
         takes a location as an argument and returns a list containing the
         years where games were held in the given location
         """
-        return self.df[self.df['City']==location]['Year'].values
+        if self.df is not None:
+            return self.df[self.df['City']==location]['Year'].values
 
     def where(self, date):
         """
          takes a date as an argument and returns the location where the
         Olympics took place in the given year
         """
-        return self.df[self.df['Year']==date]['City'].values
+        if self.df is not None:
+            return self.df[self.df['Year']==date]['City'].values
 
 
 if __name__=="__main__":
