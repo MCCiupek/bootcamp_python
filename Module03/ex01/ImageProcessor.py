@@ -1,8 +1,8 @@
-#import imageio
 import sys
 import numpy as np
 from matplotlib import image
 from matplotlib import pyplot as plt
+
 
 class ImageProcessor():
     def load(self, path):
@@ -10,8 +10,8 @@ class ImageProcessor():
             array = image.imread(path)
             print("Loading image of dimensions {0} x {1}".format(*array.shape))
             return array
-        except FileNotFoundError as err:
-            print("Exception: FileNotFoundError -- strerror: {0}".format(err.strerror))
+        except Exception as err:
+            print("Error: {0} -- {1}".format(type(err).__name__, err.strerror))
             return None
 
     def display(self, array):
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # Output
     # None
 
-    arr = imp.load("empty_file.png")
+    arr = imp.load("../ressources/empty_file.png")
     # Output
     # Exception: OSError -- strerror: None
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # Output
     # None
 
-    arr = imp.load("../resources/42AI.png")
+    arr = imp.load("../ressources/42AI.png")
     # Output
     # Loading image of dimensions 200 x 200
     print(arr)

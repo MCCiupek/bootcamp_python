@@ -30,6 +30,5 @@ if __name__=="__main__":
 
     loader = FileLoader()
     data = loader.load('../data/athlete_events.csv')
-    # loader.display(data, 12)
 
     print(howManyMedalsByCountry(data, 'Italy'))

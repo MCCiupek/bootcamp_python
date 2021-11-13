@@ -1,23 +1,22 @@
-#import imageio
 import sys
 import numpy as np
 from matplotlib import image
 from matplotlib import pyplot as plt
-import cv2
+
 
 class ImageProcessor():
     def load(self, path):
         try:
-            array = cv2.imread(path, cv2.CV_LOAD_IMAGE_COLOR)
+            array = image.imread(path)
             print("Loading image of dimensions {0} x {1}".format(*array.shape))
             return array
-        except FileNotFoundError as err:
-            print("Exception: FileNotFoundError -- strerror: {0}".format(err.strerror))
+        except Exception as err:
+            print("Error: {0} -- {1}".format(type(err).__name__, err.strerror))
             return None
 
     def display(self, array):
-        cv2.imshow(array)
-        # plt.show()
+        plt.imshow(array)
+        plt.show()
 
 
 if __name__ == "__main__":

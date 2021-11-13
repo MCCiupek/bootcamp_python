@@ -125,9 +125,9 @@ if __name__ == "__main__":
     from ImageProcessor import ImageProcessor
 
     imp = ImageProcessor()
-    arr = imp.load("../resources/elon_canaGAN.png")
-    arr[:,:][:] = arr[:,:][:-1]
-    print(arr)
+    #arr = imp.load("../ressources/42AI.png")
+    arr = imp.load("../ressources/elon_canaGAN.png")
+    arr = arr[:,:,:3]
 
     from ColorFilter import ColorFilter
     
